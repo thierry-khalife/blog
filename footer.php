@@ -13,7 +13,7 @@
             <?php } 
             if( $_SESSION['droits'] == 1337 ){ 
             ?>
-            <a href="admin.php"><img src="img/admin.png"></a>
+            <a href="admin.php">Admin Panel</a>
             <?php }
             }?>
         </nav>
