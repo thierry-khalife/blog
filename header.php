@@ -23,7 +23,7 @@
              <?php if( $_SESSION['droits'] == 42 || $_SESSION['droits'] == 1337 ){ ?>
              <section class="undernav">
                 <a href="creer-article.php"><img src="img/article.png"></a>
-                <a href="creer-article.php">Admin</a>
+                <a href="creer-article.php">Créer un Article</a>
             </section>
              <?php } ?>
               <?php if( $_SESSION['droits'] == 1337 ){ ?>
