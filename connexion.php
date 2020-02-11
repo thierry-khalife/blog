@@ -15,7 +15,7 @@
                     {
                         $_SESSION['login'] = $_POST['login'];
                         $_SESSION['droits'] = $resultat[0][4];
-                        
+                        header('Location:index.php');
                     }
             else {
                 $ismdpwrong = true;
