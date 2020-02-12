@@ -21,12 +21,12 @@
                     }
                     $requetelike = "INSERT INTO votes (id_utilisateur, id_message, valeur) VALUES ($intidmoi, $intidcom, 1)";
                     $querylike = mysqli_query($cnx, $requetelike);
-                    header("Location: messages.php?idthread=$intidthread");
+                    header("Location: article.php?idarticle=$intidarticle");
                 }
                 if ( isset($_SESSION['login']) && isset($_POST['likebutton'.$a]) && $resultat3[0]['COUNT(*)'] != "0" ) {
                     $requeteresetlike = "DELETE FROM votes WHERE id_message=$intidcom AND id_utilisateur=$intidmoi";
                     $queryresetlike = mysqli_query($cnx, $requeteresetlike);
-                    header("Location: messages.php?idthread=$intidthread");
+                    header("Location: article.php?idarticle=$intidarticle");
                 }
                 if ( isset($_SESSION['login']) && isset($_POST['dislikebutton'.$a]) && $resultat4[0]['COUNT(*)'] == "0" ) {
                     if ( $resultat3[0]['COUNT(*)'] == "1" ) {
@@ -35,11 +35,11 @@
                     }
                     $requetedislike = "INSERT INTO votes (id_utilisateur, id_message, valeur) VALUES ($intidmoi, $intidcom, -1)";
                     $querydislike = mysqli_query($cnx, $requetedislike);
-                    header("Location: messages.php?idthread=$intidthread");
+                    header("Location: article.php?idarticle=$intidarticle");
                 }
                 if ( isset($_SESSION['login']) && isset($_POST['dislikebutton'.$a]) && $resultat4[0]['COUNT(*)'] != "0" ) {
                     $requeteresetlike = "DELETE FROM votes WHERE id_message=$intidcom AND id_utilisateur=$intidmoi";
                     $queryresetlike = mysqli_query($cnx, $requeteresetlike);
-                    header("Location: messages.php?idthread=$intidthread");
+                    header("Location: article.php?idarticle=$intidarticle");
                 }
 ?>
