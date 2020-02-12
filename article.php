@@ -118,9 +118,9 @@ if ( isset($_POST['envoyer']) == true && isset($_POST['commentaire']) && strlen(
                 <?php // SYSTEME DELETE WHEN ADMIN
                 if (isset($_POST["delete".$a])) {
                     $todel = $_POST["delete".$a];
-                    $requetedel = "DELETE FROM commentaire WHERE id=$todel";
+                    $requetedel = "DELETE FROM commentaires WHERE id=$todel";
                     $querydel = mysqli_query($cnx, $requetedel);
-                    $requetedellike = "DELETE FROM votes WHERE id_commentaire=$todel";
+                    $requetedellike = "DELETE FROM votes WHERE id_message=$todel";
                     $querydellike = mysqli_query($cnx, $requetedellike);
                     header("Location: article.php?idarticle=$intidarticle");
                 }
