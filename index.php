@@ -27,7 +27,29 @@ $cnx = mysqli_connect("localhost", "root", "", "blog");
 ?>
 
 <main>
-   HI HOW ARE YOU
+    <?php
+    $requete = "SELECT * FROM articles ORDER BY id DESC LIMIT 3";
+    $query = mysqli_query($cnx, $requete);
+    $resultat = mysqli_fetch_all($query, MYSQLI_ASSOC);
+    $size = count($resultat);
+    
+    $i = 0;
+    while ($i < $size) {
+       $iduser = $resultat[$i]['id_utilisateur'];
+       $requeteuser = "SELECT login FROM utilisateurs WHERE id = $iduser";
+       $queryuser = mysqli_query($cnx, $requeteuser);
+       $resultatuser = mysqli_fetch_all($queryuser, MYSQLI_ASSOC);
+       echo "Article : <br>";
+       echo $resultat[$i]['article'];
+       echo "<br> Posté Le <b>".$resultat[$i]['date']."</b> ";
+       echo "Par <b>".$resultatuser[0]['login']."</b><br>";
+       $i++;
+    }
+    
+    ?>
+
+<a href="articles.php">Page Articles</a>
+
 </main>
 
 <?php
