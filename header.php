@@ -1,4 +1,5 @@
 <header>
+        <img class="logoheader" src="img/roamsweetroam-logo.png" alt="logoheader" />
         <nav class="nav">
             <section class="navbtn">
                 <a class="link1" href="index.php">Accueil</a>
@@ -7,12 +8,16 @@
             <?php if( !isset($_SESSION['login']) ) { ?>
 
             <section class="navbtn">
+                <a class="link1" href="articles.php/?start=0.php">Articles</a>
                 <section class="submenu">
-                    <article class="topsubmenu">
-                        <a class="link1" href="connexion.php">Articles</a>
+                    <article class="dropdownsubmenu">
+                        <a class="link2" href="articles.php/?categorie=1&start=0.php">Destinations</a>
                     </article>
                     <article class="dropdownsubmenu">
-                        <a href="connexion.php">Test</a>
+                        <a class="link2" href="articles.php/?categorie=2&start=0.php">Conseils</a>
+                    </article>
+                    <article class="dropdownsubmenu">
+                        <a class="link2" href="articles.php/?categorie=3&start=0.php">Recommandations</a>
                     </article>
                 </section>
             </section>

@@ -46,37 +46,42 @@
     if ( !isset($_SESSION['login']) ) {
     ?>
         <form class="form_site" method="post" action="connexion.php">
-            <label>IDENTIFIANT</label>
-            <input type="text" name="login" ><br />
-            <label>MOT DE PASSE</label>
-            <input type="password" name="password" ><br />
-            <input class="mybutton" type="submit" value="Se connecter" name="connexion" >
-        </form>
+            <fieldset>
+                <legend>Connexion</legend>
+                <section class="cform">
+                    <label>Identifiant</label>
+                    <input type="text" name="login" ><br />
+                    <label>Mot de passe</label>
+                    <input type="password" name="password" ><br />
+                    <input class="mybutton" type="submit" value="Se connecter" name="connexion" />
         <?php
         if ( $ismdpwrong == true ) {
         ?>
-            <p>Identifiant ou mot de passe incorrect.</p>
+            <p><span class="red">Identifiant ou mot de passe incorrect.</span></p>
         <?php
         }
         elseif ( $isIDinconnu == true ) {
         ?>
-            <p>Cet identifiant n'exsite pas.</p>
+            <p><span class="red">Cet identifiant n'exsite pas.</span></p>
         <?php
         }
         elseif ( $ischampremplis == true ) {
         ?>
-            <p>Merci de remplir tous les champs!</p>
+            <p><span class="red">Merci de remplir tous les champs!</span></p>
         <?php
         }
     }
 
     elseif ( isset($_SESSION['login']) ) {
     ?>
-        <center><p>ERREUR<br />
-        Vous êtes déjà connecté !</p></center>
+        <span class="red center"><p>ERREUR<br />
+        Vous êtes déjà connecté !</p></span>
     <?php
     }
     ?>
+                </section>
+            </fieldset>
+        </form>
     </main>
    <?php include("footer.php"); ?>
 </body>
