@@ -1,0 +1,171 @@
+<?php
+session_start();
+ob_start();
+$cnx = mysqli_connect("localhost", "root", "", "blog");
+
+if ( isset($_GET["idarticle"]) ) {
+    $idarticle = $_GET["idarticle"];
+    $intidarticle = intval($idarticle);
+    $requete1 = "SELECT * FROM commentaires WHERE id_article=$intidarticle ORDER BY date ASC";
+    $query1 = mysqli_query($cnx, $requete1);
+    $resultat = mysqli_fetch_all($query1, MYSQLI_ASSOC);
+    $taille = sizeof($resultat) - 1;
+    $requetearticle = "SELECT * FROM articles WHERE id=$intidarticle";
+    $queryarticle = mysqli_query($cnx, $requetearticle);
+    $resultatarticle = mysqli_fetch_all($queryarticle, MYSQLI_ASSOC);
+}
+
+if ( isset($_SESSION['login']) ) {
+    $requete2 = "SELECT * FROM utilisateurs WHERE login='".$_SESSION['login']."'";
+    $query2 = mysqli_query($cnx, $requete2);
+    $resultat2 = mysqli_fetch_all($query2, MYSQLI_ASSOC);
+}
+else {
+    header("Location: connexion.php");
+}
+
+date_default_timezone_set('Europe/Paris');
+$is2car = false;
+
+if ( isset($_POST['envoyer']) == true && isset($_POST['commentaire']) && strlen($_POST['commentaire']) >= 2 ) {
+    $msg = $_POST['commentaire'];
+    $remsg = addslashes($msg);
+    $requete2 = "INSERT INTO commentaires (commentaire, id_article, id_utilisateur, date) VALUES ('$remsg', '$intidarticle', ".$resultat2[0]['id'].", '".date("Y-m-d H:i:s")."')";
+    $query2 = mysqli_query($cnx, $requete2);
+    header("Location: article.php?idarticle=$intidarticle");
+    }
+    elseif ( isset($_POST['envoyer']) == true && isset($_POST['commentaire']) && strlen($_POST['commentaire']) < 2 ) {
+        $is2car = true;
+    }
+?>
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>Message</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+
+<body>
+<?php include("header.php"); ?>
+    <main>
+         <section class="cmid">
+            <h1>Article :</h1>
+            <h1 class="h1topic"><?php echo $resultatarticle[0]['article']; ?></h1>
+            <?php
+            $a = 0;
+            if( !empty($resultat) && isset($_GET["idarticle"]) ) {
+            while ($a <= $taille) {
+                $datesql = $resultat[$a]['date'];
+                $newdate = date('d-m-Y à H:i:s', strtotime($datesql));
+                $iduser = $resultat[$a]['id_utilisateur'];
+                $idcom = $resultat[$a]['id'];
+                $intidcom = intval($idcom);
+                $requetelogin = "SELECT login, email, id_droits FROM utilisateurs WHERE id=$iduser";
+                $querylogin = mysqli_query($cnx, $requetelogin);
+                $resultatlogin = mysqli_fetch_all($querylogin, MYSQLI_ASSOC);
+
+                include("like.php"); // SYSTEME DE LIKE/DISLIKE
+                ?>
+                <section class="cmessages">
+                    <article class="messageleft">
+
+                        <h2><?php echo $resultatlogin[0]["login"]; ?></h2>
+                    </article>
+                    <article class="message">
+                        <article>
+                        <?php
+                        echo "le <i><u>".$newdate."</u></i><br /><br />";
+                        echo $resultat[$a]['commentaire']."<br />";
+                        ?>
+                        </article>
+                        <section>
+                            <article class="likebtn">
+                                <form method="post" action="article.php?idarticle=<?php echo $intidarticle; ?>">
+                                    <div id="formvote">
+                                    <?php
+                                    if ( isset($_SESSION['login']) && $resultat3[0]['COUNT(*)'] != "0" ) {
+                                        echo "<input type=\"submit\" name=\"likebutton".$a."\" id=\"likev\" value=\"like\"><div class=\"resultatvotes\">".$resultat5[0]['COUNT(*)']."</div>";
+                                        echo "<input type=\"submit\" name=\"dislikebutton".$a."\" id=\"dislike\" value=\"dislike\"><div class=\"resultatvotes\">".$resultat6[0]['COUNT(*)']."</div>";
+                                    }
+                                    elseif ( isset($_SESSION['login']) && $resultat4[0]['COUNT(*)'] != "0" ) {
+                                        echo "<input type=\"submit\" name=\"likebutton".$a."\" id=\"like\" value=\"like\"><div class=\"resultatvotes\">".$resultat5[0]['COUNT(*)']."</div>";
+                                        echo "<input type=\"submit\" name=\"dislikebutton".$a."\" id=\"dislikev\" value=\"dislike\"><div class=\"resultatvotes\">".$resultat6[0]['COUNT(*)']."</div>";
+                                    }
+                                    else {
+                                        echo "<input type=\"submit\" name=\"likebutton".$a."\" id=\"like\" value=\"like\"><div class=\"resultatvotes\">".$resultat5[0]['COUNT(*)']."</div>";
+                                        echo "<input type=\"submit\" name=\"dislikebutton".$a."\" id=\"dislike\" value=\"dislike\"><div class=\"resultatvotes\">".$resultat6[0]['COUNT(*)']."</div>";
+                                    }
+                                    ?>
+                                    </div>
+                                </form>
+                            </article>
+                            <article class="deletebtn">
+                                <?php
+                                if(isset($_SESSION['login']) && ($_SESSION['droits'] == 1337 || $_SESSION['droits'] == 42))
+                                {
+                                    echo "<form method=\"post\" action=\"article.php?idarticle=$intidarticle\">
+                                    <br><input type=\"submit\" class=\"submitdel\"  name=\"delete".$a."\" value=\"$idcom\" />
+                                    </form>";
+                                }
+                                ?>
+                            </article>
+                        </section>
+                    </article>
+                </section>
+                <?php // SYSTEME DELETE WHEN ADMIN
+                if (isset($_POST["delete".$a])) {
+                    $todel = $_POST["delete".$a];
+                    $requetedel = "DELETE FROM commentaires WHERE id=$todel";
+                    $querydel = mysqli_query($cnx, $requetedel);
+                    $requetedellike = "DELETE FROM votes WHERE id_message=$todel";
+                    $querydellike = mysqli_query($cnx, $requetedellike);
+                    header("Location: article.php?idarticle=$intidarticle");
+                }
+                $a++;
+            }
+        }
+        elseif ( isset($_GET["idaritlce"]) && empty($resultatarticle) || isset($_SESSION['login']) && !isset($_GET["idarticle"]) ) {
+            echo "Cet Article n'existe pas !";
+        }
+        elseif ( isset($_GET["idarticle"]) && !empty($resultatarticle) && empty($resultat) ) {
+            echo "Pas de commentaire pour cet article, envoyez votre premier message !";
+        }
+            ?>
+            <?php
+           
+            if ( isset($_SESSION['login']) && isset($_GET["idarticle"]) && !empty($resultatarticle) ) {
+            ?>
+                <form class="form_site" method="post" action="article.php?idarticle=<?php echo $intidarticle; ?>">
+                    <label>VOTRE MESSAGE</label>
+                    <textarea name="commentaire" ></textarea><br />
+                    <input type="submit" value="Envoyer" name="envoyer" >
+                </form>
+                <?php
+                if ( $is2car == true ) {
+                ?>
+                    <p>Votre message doit comporter au moins 2 caractères.</p>
+                <?php
+                }
+            }
+
+            elseif ( !isset($_SESSION['login']) ) {
+            ?>
+                <center><p><b>ERREUR</b><br />
+                Vous devez être connecté pour accéder à cette page.</p></center>
+            <?php
+            }
+            ?>
+           </section>
+        <section>
+     </section>
+    </main>
+<?php include("footer.php"); 
+mysqli_close($cnx);
+ob_end_flush();
+?>
+</body>
+
+</html>
