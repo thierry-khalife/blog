@@ -4,9 +4,6 @@
             <section class="navbtn">
                 <a class="link1" href="index.php">Accueil</a>
             </section>
-
-            <?php if( !isset($_SESSION['login']) ) { ?>
-
             <section class="navbtn">
                 <a class="link1" href="articles.php?start=0">Articles</a>
                 <section class="submenu">
@@ -21,6 +18,8 @@
                     </article>
                 </section>
             </section>
+
+            <?php if( !isset($_SESSION['login']) ) { ?>
             <section class="navbtn">
                 <a class="link1" href="connexion.php">Connexion</a>
             </section>

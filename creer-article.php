@@ -28,6 +28,7 @@
     ?>
         <form method="post" action="creer-article.php" class="form_site">
             <label>VOTRE ARTICLE</label>
+            <input type="text" name="titre" />
             <textarea name="article" ></textarea><br />
             <label for="categorie"><b>CATEGORIES</b></label>
             <select name="categorie">
@@ -71,7 +72,9 @@
         $msg = $_POST['article'];
         $categorie = $_POST['categorie'] + 1;
         $remsg = addslashes($msg);
-        $requete2 = "INSERT INTO articles (article, id_utilisateur, id_categorie, date) VALUES ('$remsg', ".$resultat[0][0].", '$categorie','".date("Y-m-d H:i:s")."')";
+        $titre = $_POST["titre"];
+        $retitre = addslashes($titre);
+        $requete2 = "INSERT INTO articles (article, id_utilisateur, id_categorie, date, titre) VALUES ('$remsg', ".$resultat[0][0].", '$categorie','".date("Y-m-d H:i:s")."', '$retitre')";
         $query2 = mysqli_query($connexion, $requete2);
         
         mysqli_close($connexion);
