@@ -8,16 +8,16 @@
             <?php if( !isset($_SESSION['login']) ) { ?>
 
             <section class="navbtn">
-                <a class="link1" href="articles.php/?start=0.php">Articles</a>
+                <a class="link1" href="articles.php?start=0">Articles</a>
                 <section class="submenu">
                     <article class="dropdownsubmenu">
-                        <a class="link2" href="articles.php/?categorie=1&start=0.php">Destinations</a>
+                        <a class="link2" href="articles.php?categorie=1&start=0">Destinations</a>
                     </article>
                     <article class="dropdownsubmenu">
-                        <a class="link2" href="articles.php/?categorie=2&start=0.php">Conseils</a>
+                        <a class="link2" href="articles.php?categorie=2&start=0">Conseils</a>
                     </article>
                     <article class="dropdownsubmenu">
-                        <a class="link2" href="articles.php/?categorie=3&start=0.php">Recommandations</a>
+                        <a class="link2" href="articles.php?categorie=3&start=0">Recommandations</a>
                     </article>
                 </section>
             </section>
