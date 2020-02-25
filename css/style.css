@@ -271,3 +271,121 @@ form input[type="submit"]:not(:hover) {
     font-family: "Lato-Regular";
     font-size: 24px;
 }
+
+/* ARTICLES */
+
+.carticles {
+    height: 624px;
+    width: 1100px;
+    background-color: #f5f5f5;
+    display: flex;
+    flex-direction: column;
+    margin: 0 0 40px 0;
+    box-shadow: 1px 2px 4px grey;
+}
+
+.imgarticles {
+    height: 284px;
+    min-width: 1100px;
+    overflow: hidden;
+}
+
+.titrearticles {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    padding-left: 18px;
+    /* background-color: pink; */
+    font-size: 36px;
+    color: #ef9d87;
+    font-family: "AmaticSC-Regular";
+    font-weight: bold;
+}
+
+.descarticles {
+    height: 184px;
+    overflow: hidden;
+    margin: 8px 18px 0 18px;
+    font-family: "Lato-Regular";
+    /* background-color: cyan; */
+}
+
+.mainarticles {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.basarticles {
+    /* background-color: lightpink; */
+    height: 96px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-top: 4px solid #ef9d87;
+}
+
+.basleftarticles {
+    width: 50%;
+    /* background-color: yellow; */
+    padding-left: 14px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.basarticles p {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-family: "Lato-Regular";
+    font-size: 18px;
+}
+
+.basarticles img {
+    height: 22px;
+    width: 22px;
+    padding-left: 4px;
+    padding-right: 4px;
+}
+
+.basrightarticles {
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 24px;
+}
+
+.basrightarticles a {
+    text-decoration: none;
+    height: 44px;
+    width: 144px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Lato-Regular";
+    font-size: 16px;
+    color: whitesmoke;
+    font-weight: 500;
+    background-color: #ef9d87;
+}
+
+.basrightarticles a:hover {
+    background-color: whitesmoke;
+    border: 2px solid #ef9d87;
+    color: #ef9d87;
+    transform: scaleX(1.1);
+    transition: all 0.25s ease-in-out;
+}
+
+.basrightarticles a:not(:hover) {
+    background-color: #ef9d87;
+    border: none;
+    color: whitesmoke;
+    transform: scaleX(1);
+    transition: all 0.25s ease-in-out;
+}
