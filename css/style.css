@@ -184,9 +184,28 @@ form label {
     color: #b6b096;
 }
 
-form input[type="text"], input[type="password"], input[type="email"] {
+form input[type="text"], input[type="password"], input[type="email"], textarea, select {
     height: 50px;
     width: 260px;
+    border: 2px solid #b6b096;
+    margin: 20px;
+    padding-left: 10px;
+    font-size: 18px;
+    font-family: "Lato-Regular";
+    color: #262626;
+}
+
+form input[type="file"] {
+    font-size: 18px;
+    font-family: "Lato-Regular";
+    color: #262626;
+    margin: 20px;
+    padding-left: 10px;
+}
+
+form textarea {
+    height: 60vh;
+    width: 50vw;
     border: 2px solid #b6b096;
     margin: 20px;
     padding-left: 10px;
@@ -230,7 +249,8 @@ form input[type="submit"]:not(:hover) {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 26vw;
+    min-width: 26vw;
+    margin: 40px;
     /* height: 46vh; */
 }
 

@@ -11,6 +11,7 @@
 <html>
 <head>
     <title>Blog - Créer un article</title>
+    <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
@@ -26,23 +27,31 @@
 
     if ( isset($_SESSION['login']) && ($_SESSION['droits'] == 42 || $_SESSION['droits'] == 1337)) {
     ?>
-        <form method="post" action="creer-article.php" class="form_site">
-            <label>VOTRE ARTICLE</label>
-            <input type="text" name="titre" />
-            <textarea name="article" ></textarea><br />
-            <label for="categorie"><b>CATEGORIES</b></label>
-            <select name="categorie">
-             <?php 
-                        $i=0;
-                        $taille = count($resultatcat);
-                        while($i < $taille)
-                        {
-                           echo"<option value=".$i.">".$resultatcat[$i]["nom"]."</option>";
-                            $i++;
-                        } 
-                        ?>    
-            </select>
-            <input class= "mybutton" type="submit" value="Envoyer" name="envoyer" >
+        <form method="post" action="creer-article.php" class="form_site" enctype="multipart/form-data">
+            <fieldset>
+                <legend>Votre article</legend>
+                <section class="cform">
+                    <label>Titre de l'article</label>
+                    <input type="text" name="titre" />
+                    <label>Contenu de l'article</label>
+                    <textarea name="article" ></textarea><br />
+                    <label for="categorie"><b>Catégorie</b></label>
+                    <select name="categorie">
+                    <?php 
+                                $i=0;
+                                $taille = count($resultatcat);
+                                while($i < $taille)
+                                {
+                                echo"<option value=".$i.">".$resultatcat[$i]["nom"]."</option>";
+                                    $i++;
+                                } 
+                                ?>
+                    </select>
+                    <label>Image de profil</label>
+                    <input type="file" name="fileToUpload" id="fileToUpload">
+                    <input class= "mybutton" type="submit" value="Envoyer" name="envoyer" >
+                </section>
+            </fieldset>
         </form>
         <?php
         if ( $is10car == true ) {
@@ -74,11 +83,45 @@
         $remsg = addslashes($msg);
         $titre = $_POST["titre"];
         $retitre = addslashes($titre);
-        $requete2 = "INSERT INTO articles (article, id_utilisateur, id_categorie, date, titre) VALUES ('$remsg', ".$resultat[0][0].", '$categorie','".date("Y-m-d H:i:s")."', '$retitre')";
-        $query2 = mysqli_query($connexion, $requete2);
+        $go = false;
+        if ( !empty($_FILES["fileToUpload"]["name"]) ) {
+            $target_dir = "img/";
+            $name = $_FILES["fileToUpload"]["name"];
+            $yo = explode(".", $name);
+            $ext = end($yo);
+            $target_file = "img/p".$titre.".".$ext;
+            echo $target_file;
+            $uploadOk = 1;
+            $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+            $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
+            if( $check !== false ) {
+                $uploadOk = 1;
+            } 
+            else {
+                $uploadOk = 0;
+            }
+            // Vérifie la taille de l'image
+            if ( $_FILES["fileToUpload"]["size"] > 500000000000 ) {
+                $uploadOk = 0;
+            }
+            // Autorise que certains format d'images
+            if( $imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif" ) {
+                $uploadOk = 0;
+            }
+            else {
+                if ($uploadOk == 1 && move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+                    $go = true;
+                }
+            }
+        }
+        if ( $go == true ) {
+            $requete2 = "INSERT INTO articles (article, id_utilisateur, id_categorie, date, titre, img) VALUES ('$remsg', ".$resultat[0][0].", '$categorie','".date("Y-m-d H:i:s")."', '$retitre', '$target_file')";
+            $query2 = mysqli_query($connexion, $requete2);
+            echo $requete2;
+        }
         
         mysqli_close($connexion);
-        header("Location: creer-article.php");
+        // header("Location: creer-article.php");
     }
     elseif ( isset($_POST['envoyer']) == true && isset($_POST['article']) && strlen($_POST['article']) < 10 ) {
         $is10car = true;
