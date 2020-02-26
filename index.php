@@ -37,4 +37,4 @@ $cnx = mysqli_connect("localhost", "root", "", "blog");
 ?>
 
 </body>
-</html>
+</html>.
