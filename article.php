@@ -122,7 +122,7 @@ if ( isset($_POST['envoyer']) == true && isset($_POST['commentaire']) && strlen(
                     $querydel = mysqli_query($cnx, $requetedel);
                     $requetedellike = "DELETE FROM votes WHERE id_message=$todel";
                     $querydellike = mysqli_query($cnx, $requetedellike);
-                    header("Location: article.php?idarticle=$intidarticle");
+                    header("Location:article.php?idarticle=$intidarticle");
                 }
                 $a++;
             }
@@ -161,8 +161,27 @@ if ( isset($_POST['envoyer']) == true && isset($_POST['commentaire']) && strlen(
            </section>
         <section>
      </section>
+
+    <?php 
+    if($_SESSION['droits'] == 1337 || $_SESSION['droits'] == 42){
+    ?>
+    <form action="article.php?idarticle=<?php echo $intidarticle; ?>" method="post">
+    <label for="editarticle">Edit Article:</label>
+    <textarea id="edit" name="editarticle"><?php echo $resultatarticle[0]['article']; ?></textarea>
+    <input type="submit" name="edita" value="Edit">
+    </form>
+    <?php
+    }
+    if (isset($_POST["edita"])) {
+       $edited = $_POST["editarticle"];
+       $editrequete = "UPDATE articles SET article = '$edited' WHERE id = $intidarticle";
+       $queryedit = mysqli_query($cnx, $editrequete);
+       header("Location:article.php?idarticle=$intidarticle");
+    }
+    ?>
     </main>
-<?php include("footer.php"); 
+<?php 
+include("footer.php"); 
 mysqli_close($cnx);
 ob_end_flush();
 ?>
