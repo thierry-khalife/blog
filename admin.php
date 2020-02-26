@@ -46,7 +46,11 @@ if(isset($_SESSION['login']) && $_SESSION['droits'] == 1337)
     while($nbArticles != $countArticles)
     {   
         $idArticle = $resultatArticles[$nbArticles][0];
-        echo "".$resultatArticles[$nbArticles][5]." Modifier"; ?>
+        echo "".$resultatArticles[$nbArticles][5].""; ?>
+
+        <form method="post" action="">
+            <input type="submit" name="modifArticle<?php echo $idArticle; ?>" value="Modifier">
+        </form>
 
         <form method="post" action="">
             <input type="submit" name="supprimerArticle<?php echo $idArticle; ?>" value="Supprimer">
@@ -54,6 +58,11 @@ if(isset($_SESSION['login']) && $_SESSION['droits'] == 1337)
 
         <?php
         
+        if(isset($_POST["modifArticle$idArticle"]))
+        {
+            header('Location:idarticle.php?id='.$idArticle.'');
+        }
+
         if(isset($_POST["supprimerArticle$idArticle"]))
         {
             $deleteArticle ="DELETE FROM articles WHERE id = '".$idArticle."'";
@@ -87,6 +96,8 @@ if(isset($_SESSION['login']) && $_SESSION['droits'] == 1337)
             $queryUpdateCate =mysqli_query($connexion,$updateCate);
             header('Location:admin.php');
         }
+
+
 
         if(isset($_POST["supprimerCate$idCate"]))
             {
