@@ -43,14 +43,14 @@ include("header.php");
                     <?php echo $values[5]; ?>
                 </article>
                 <article class="descarticles">
-                    <?php echo $values[1]; ?>
+                    <?php echo nl2br($values[1]); ?>
                 </article>
                 <article class="basarticles">
                     <article class="basleftarticles">
                         <p>Créé le <img class="iconarticles" src="img/icondate.png"><?php echo $date;?> par <img class="iconarticles" src="img/iconuser.png"><?php echo $values[7];?></p>
                     </article>
                     <article class="basrightarticles">
-                        <a href="article.php">Voir plus</a>
+                        <a href="article.php?idarticle=<?php echo $values[0]; ?>">Voir plus</a>
                     </article>
                 </article>
             </section>

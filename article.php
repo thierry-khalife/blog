@@ -53,7 +53,7 @@ if ( isset($_POST['envoyer']) == true && isset($_POST['commentaire']) && strlen(
     <main>
          <section class="cmid">
             <h1>Article :</h1>
-            <h1 class="h1topic"><?php echo $resultatarticle[0]['article']; ?></h1>
+            <h1 class="h1topic"><?php echo nl2br($resultatarticle[0]['article']); ?></h1>
             <?php
             $a = 0;
             if( !empty($resultat) && isset($_GET["idarticle"]) ) {
