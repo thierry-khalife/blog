@@ -14,8 +14,6 @@ $query = mysqli_query($cnx, $requete);
 $resultat = mysqli_fetch_all($query, MYSQLI_ASSOC);
 $size = count($resultat);
 
-var_dump($resultat);
-
 ?>
 
 <!doctype html>
