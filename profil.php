@@ -24,18 +24,24 @@ session_start();
 
                 ?>
 
-                <form class="form_site" action="profil.php" method="post">
-                    <label> Login </label>
-                    <input type="text" name="login" value=<?php echo $resultat['login']; ?> />
-                     <label> Email </label>
-                    <input type="email" name="email" value=<?php echo $resultat['email']; ?> />
-                    <label> New Password </label>
-                    <input type="password" name="passwordx" />
-                    <label> Confirm New Password </label>
-                    <input type="password" name="passwordconf" />
-                    <input name="ID" type="hidden" value=<?php echo $resultat['id']; ?> />
-                    <br>
-                    <input type="submit" name="modifier" value="Modifier" />
+                <form action="profil.php" method="post">
+                    <fieldset>
+                        <legend>Mon profil</legend>
+                        <section class="cform">
+                            <label>Identifiant</label>
+                            <input type="text" name="login" value=<?php echo $resultat['login']; ?> />
+                            <label>Adresse email</label>
+                            <input type="email" name="email" value=<?php echo $resultat['email']; ?> />
+                            <label>Nouveau mot de passe</label>
+                            <input type="password" name="passwordx" />
+                            <label>Confirmation du mot de passe</label>
+                            <input type="password" name="passwordconf" />
+                            <input name="ID" type="hidden" value=<?php echo $resultat['id']; ?> />
+                            <br>
+                            <input type="submit" name="modifier" value="Modifier" />
+                        </section>
+                        </legend>
+                    </fieldset>
                 </form>
 
                 <?php 

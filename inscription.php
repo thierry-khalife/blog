@@ -15,7 +15,7 @@
             <?php
             if (isset($_SESSION["login"])) 
             {
-                echo "Bonjour, " . $_SESSION["login"] . " vous êtes déja connecté impossible de s'inscrire.<br />";
+                echo "<span class=\"red center\">Bonjour, " . $_SESSION["login"] . " vous êtes déja connecté impossible de s'inscrire.</span><br />";
                 ?>
                     <form action="index.php" method="post">
                         <input name="deco" value="Deconnexion" type="submit" />
@@ -25,18 +25,22 @@
             else 
             {
                 ?>
-                <article><h1>Veuillez rentrer vos informations</h1></article>
-                    <form class="form_site" action="inscription.php" method="post">
-                        <label>Login</label>
-                        <input type="text" name="login" required>
-                        <label>Password</label>
-                        <input type="password" name="mdp" required>
-                        <label>Password confirmation</label>
-                        <input type="password" name="mdpval" required>
-                        <label>Email</label>
-                        <input type="email" name="email" required>
-                        <br />
-                        <input class="mybutton"  type="submit" value="S'inscrire" name="valider">
+                    <form action="inscription.php" method="post">
+                        <fieldset>
+                            <legend>Inscription</legend>
+                            <section class="cform">
+                                <label>Identifiant</label>
+                                <input type="text" name="login" required>
+                                <label>Mot de passe</label>
+                                <input type="password" name="mdp" required>
+                                <label>Confirmation du mot de passe</label>
+                                <input type="password" name="mdpval" required>
+                                <label>Email</label>
+                                <input type="email" name="email" required>
+                                <br />
+                                <input class="mybutton"  type="submit" value="S'inscrire" name="valider">
+                            </section>
+                        </fieldset>      
                     </form>
                 <?php
 
