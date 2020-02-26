@@ -75,30 +75,27 @@ if(isset($_SESSION['login']) && $_SESSION['droits'] == 1337)
             <input type="submit" name="envoyerCateModif<?php echo $idCate; ?>" value="Modifier">
         </form>
 
-        <?php
-        
-        $updateCatePost = $_POST['cateModifier'];
-        if($_POST['envoyerCateModif'])
-        {
-            $updateCate ="UPDATE categories SET nom = '".$updateCatePost."' WHERE nom='".$nomCate."'";
-            $queryUpdateCate =mysqli_query($connexion,$updateCate);
-        }
-        ?>
-
         <form method="post" action="">
             <input type="submit" name="supprimerCate<?php echo $idCate; ?>" value="Supprimer">
         </form>
 
         <?php
 
-        if(isset($_POST["supprimerCate$idCate"]))
+        $nbCate++;
+    }
+    if(isset($_POST['envoyerCateModif']))
+    {
+        $updateCatePost = $_POST['cateModifier'];
+        $updateCate ="UPDATE categories SET nom = '".$updateCatePost."' WHERE nom='".$nomCate."'";
+        $queryUpdateCate =mysqli_query($connexion,$updateCate);
+    }
+
+    if(isset($_POST["supprimerCate$idCate"]))
         {
             $deleteCate ="DELETE FROM categories WHERE id = '".$idCate."'";
             $queryDeletedCate = mysqli_query($connexion,$deleteCate);
             header('Location:admin.php');
         }
-        $nbCate++;
-    }
 
     if(isset($_POST['envoyerCategorie']) && strlen($_POST['ajoutCategorie']) != 0)
     {
