@@ -38,6 +38,7 @@ include("header.php");
 ?>
     <main class="mainarticles">
     <?php
+    if ( isset ($_GET["start"]) ) {
         foreach( $resultatrecuparticles as $values) {
             $date = date("d-m-Y", strtotime($values[4]));
         ?>
@@ -80,6 +81,10 @@ include("header.php");
             }
             $n++;
             $j += 5;
-            }
+        }
+    }
+    else {
+        echo "<span class=\"red center\">Erreur 404</span>";
+    }
         ?>
             </article>

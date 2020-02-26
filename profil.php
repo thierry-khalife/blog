@@ -85,7 +85,7 @@ session_start();
     else 
     {
         ?>
-        <p>Veuillez vous connecter pour accéder à votre page !</p>
+        <p class="red center">Veuillez vous connecter pour accéder à votre page !</p>
         <?php
     }
     ?>

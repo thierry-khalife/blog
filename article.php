@@ -51,6 +51,7 @@ if ( isset($_POST['envoyer']) == true && isset($_POST['commentaire']) && strlen(
 <body>
 <?php include("header.php"); ?>
     <main class="mainarticles">
+        <?php if ( isset($_GET["idarticle"]) ) {?>
          <section class="cmid">
             <section class="articlepart">
             <h1><?php echo $resultatarticle[0]["titre"]; ?></h1>
@@ -148,6 +149,28 @@ if ( isset($_POST['envoyer']) == true && isset($_POST['commentaire']) && strlen(
            </section>
         <section>
      </section>
+
+    <?php 
+    if($_SESSION['droits'] == 1337 || $_SESSION['droits'] == 42){
+    ?>
+    <form action="article.php?idarticle=<?php echo $intidarticle; ?>" method="post">
+    <label for="editarticle">Edit Article:</label>
+    <textarea id="edit" name="editarticle"><?php echo $resultatarticle[0]['article']; ?></textarea>
+    <input type="submit" name="edita" value="Edit">
+    </form>
+    <?php
+    }
+    if (isset($_POST["edita"])) {
+       $edited = $_POST["editarticle"];
+       $editrequete = "UPDATE articles SET article = '$edited' WHERE id = $intidarticle";
+       $queryedit = mysqli_query($cnx, $editrequete);
+       header("Location:article.php?idarticle=$intidarticle");
+    }
+}
+else {
+    echo "<span class=\"red center\">Erreur 404, article introuvable.</span>";
+}
+    ?>
     </main>
 <?php include("footer.php"); 
 mysqli_close($cnx);
