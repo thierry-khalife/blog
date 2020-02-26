@@ -82,6 +82,7 @@
         $categorie = $_POST['categorie'] + 1;
         $remsg = addslashes($msg);
         $titre = $_POST["titre"];
+        $img = preg_replace("/[^a-zA-Z]/", "", $titre);
         $retitre = addslashes($titre);
         $go = false;
         if ( !empty($_FILES["fileToUpload"]["name"]) ) {
@@ -89,7 +90,7 @@
             $name = $_FILES["fileToUpload"]["name"];
             $yo = explode(".", $name);
             $ext = end($yo);
-            $target_file = "img/p".$titre.".".$ext;
+            $target_file = "img/p".$img.".".$ext;
             echo $target_file;
             $uploadOk = 1;
             $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));

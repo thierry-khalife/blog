@@ -6,11 +6,17 @@ if ( isset($_GET["start"]) ) {
     $start = $_GET["start"];
     if ( isset($_GET["categorie"]) ) {
         $categorie = $_GET["categorie"];
-        $requeterecuparticles = "SELECT articles.id, articles.article, articles.id_utilisateur, articles.id_categorie, articles.date, articles.titre, articles.img, utilisateurs.login, utilisateurs.id_droits FROM articles INNER JOIN utilisateurs ON utilisateurs.id = id_utilisateur WHERE id_categorie = $categorie LIMIT 5 OFFSET $start";
+        $requeterecuparticles = "SELECT articles.id, articles.article, articles.id_utilisateur, articles.id_categorie, articles.date, articles.titre, articles.img, utilisateurs.login, utilisateurs.id_droits FROM articles INNER JOIN utilisateurs ON utilisateurs.id = id_utilisateur WHERE id_categorie = $categorie ORDER BY date DESC LIMIT 5 OFFSET $start";
+        $requetecount = "SELECT COUNT(*) FROM articles WHERE id_categorie = $categorie";
     }
     else {
-        $requeterecuparticles = "SELECT articles.id, articles.article, articles.id_utilisateur, articles.id_categorie, articles.date, articles.titre, articles.img, utilisateurs.login, utilisateurs.id_droits FROM articles INNER JOIN utilisateurs ON utilisateurs.id = id_utilisateur LIMIT 5 OFFSET $start";
+        $requeterecuparticles = "SELECT articles.id, articles.article, articles.id_utilisateur, articles.id_categorie, articles.date, articles.titre, articles.img, utilisateurs.login, utilisateurs.id_droits FROM articles INNER JOIN utilisateurs ON utilisateurs.id = id_utilisateur ORDER BY date DESC LIMIT 5 OFFSET $start";
+        $requetecount = "SELECT COUNT(*) FROM articles";
     }
+    $querycount = mysqli_query($connexion, $requetecount);
+    $resultatcount = mysqli_fetch_all($querycount);
+    $resultatcount2 = ceil($resultatcount[0][0] / 5);
+    // var_dump($resultatcount);
     $queryrecuparticles = mysqli_query($connexion, $requeterecuparticles);
     $resultatrecuparticles = mysqli_fetch_all($queryrecuparticles);
 
@@ -56,3 +62,24 @@ include("header.php");
             </section>
         <?php
         }
+        ?>
+        <article class="btnpages">
+        <?php
+        $n = 1;
+        $j = 0;
+        while ( $n <= $resultatcount2 ) {
+            if ( isset($_GET["categorie"]) ) {
+            ?>
+                <a href="articles.php?start=<?php echo $j; ?>&categorie=<?php echo $categorie; ?>"><?php echo $n; ?></a>
+            <?php
+            }
+            else {
+            ?>
+                <a href="articles.php?start=<?php echo $j; ?>"><?php echo $n; ?></a>
+            <?php
+            }
+            $n++;
+            $j += 5;
+            }
+        ?>
+            </article>
