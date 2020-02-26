@@ -9,7 +9,10 @@ if (isset($_GET["deco"])) {
 }
 
 $cnx = mysqli_connect("localhost", "root", "", "blog");
-
+$requete = "SELECT * FROM articles ORDER BY id DESC LIMIT 3";
+$query = mysqli_query($cnx, $requete);
+$resultat = mysqli_fetch_all($query, MYSQLI_ASSOC);
+$size = count($resultat);
 
 ?>
 
@@ -25,15 +28,66 @@ $cnx = mysqli_connect("localhost", "root", "", "blog");
 <?php
     include("header.php");
 ?>
-
-<main>
-   HI HOW ARE YOU
+<main class="mainindex">
+    <section class="mainarticles">
+        <?php
+        $i = 0;
+        while ($i < $size) {
+        ?>
+        <section class="carticles">
+        <article class="imgarticles">
+        <img class="imgsize" src="<?php echo $resultat[$i]['img']; ?>" alt="<?php echo $resultat[$i]['titre']; ?>" />
+        </article>
+        <?php
+        $iduser = $resultat[$i]['id_utilisateur'];
+        $requeteuser = "SELECT login FROM utilisateurs WHERE id = $iduser";
+        $queryuser = mysqli_query($cnx, $requeteuser);
+        $resultatuser = mysqli_fetch_all($queryuser, MYSQLI_ASSOC);
+        ?>
+        <article class="titrearticles">
+                        <?php echo $resultat[$i]['titre']; ?>
+        </article>
+        
+        <article class="descarticles">
+                        <?php echo $resultat[$i]['article']; ?>
+        </article>
+        <article class="basarticles">
+                        <article class="basleftarticles">
+                            <p>Créé le <img class="iconarticles" src="img/icondate.png"><?php echo $resultat[$i]['date'];?> par <img class="iconarticles" src="img/iconuser.png"><?php echo $resultatuser[0]['login'];?></p>
+                        </article>
+                        <article class="basrightarticles">
+                            <a href="article.php?idarticle=<?php echo $resultat[$i]['id']; ?>">Voir plus</a>
+                        </article>
+                    </article>
+            </section>
+        <?php 
+        $i++;
+        }
+        ?>
+        <article class="btnbottom">
+        <a href="articles.php?start=0">Plus d'articles</a>
+        </article>
+    </section>
+    <section class="indexright">
+        <article class="profilepart">
+            <article class="profilepartimg"></article>
+            <h1>Qui suis-je ?</h1>
+            <p>Je m'appelle John et je suis passionné par les voyages. A l'âge de 23 ans je suis partie en tour du monde sur un coup de tête, et c'est à ce moment-là que j'ai créé ce blog voyage.<br /><br />Il regroupe de nombreux conseils aux voyageurs et des récits de voyage inspirants, agrémentés de nombreuses photos.<br /><br />Le but, t'aider dans tes voyages et t'inspirer au quotidien !</p>
+        </article>
+        <article class="categoriepart">
+            <h1>Catégories</h1>
+            <ul>
+                <li><span>></span> <a href="articles?start=0&categorie=1">Destinations</a></li>
+                <li><span>></span> <a href="articles?start=0&categorie=2">Conseils</a></li>
+                <li><span>></span> <a href="articles?start=0&categorie=3">Recommandations</a></li>
+            </ul>
+        </article>
+    </section>
 </main>
 
 <?php
     include("footer.php");
     mysqli_close($cnx);
-
 ?>
 
 </body>

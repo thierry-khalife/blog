@@ -1,5 +1,5 @@
 <header>
-        <img class="logoheader" src="img/roamsweetroam-logo.png" alt="logoheader" />
+        <a class="logoheader" href="index.php"><img class="logoheader" src="img/roamsweetroam-logo.png" alt="logoheader" /></a>
         <nav class="nav">
             <section class="navbtn">
                 <a class="link1" href="index.php">Accueil</a>
