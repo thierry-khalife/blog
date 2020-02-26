@@ -48,7 +48,7 @@ $cnx = mysqli_connect("localhost", "root", "", "blog");
     
     ?>
 
-<a href="articles.php">Page Articles</a>
+<a href="articles.php?start=0">Page Articles</a>
 
 </main>
 
