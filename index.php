@@ -30,9 +30,7 @@ $size = count($resultat);
 ?>
 
 <main class="mainarticles">
-  
     <?php
-   
     $i = 0;
     while ($i < $size) {
     ?>
@@ -65,17 +63,15 @@ $size = count($resultat);
        <?php 
        $i++;
     }
-    
     ?>
-
-<a href="articles.php?start=0">Plus d'Articles</a>
-
+    <article class="btnbottom">
+      <a href="articles.php?start=0">Plus d'Articles</a>
+    </article>
 </main>
 
 <?php
     include("footer.php");
     mysqli_close($cnx);
-
 ?>
 
 </body>
