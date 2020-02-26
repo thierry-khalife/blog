@@ -419,3 +419,43 @@ form input[type="submit"]:not(:hover) {
     transform: scaleX(1);
     transition: all 0.25s ease-in-out;
 }
+
+/* FOOTER */
+
+footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 40px 0 40px 0;
+}
+
+footer nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    /* background-color: red; */
+    height: 60px;
+    width: 100%;
+    margin-top: 40px;
+}
+
+footer a {
+    text-decoration: none;
+    height: 60px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "AmaticSC-Regular";
+    font-size: 28px;
+    color: #b6b096;
+    font-weight: bold;
+}
+
+#copyrights{
+    font-family: "AmaticSC-Regular";
+    font-size: 28px;
+    color: #b6b096;
+}

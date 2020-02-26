@@ -1,5 +1,5 @@
   <footer>
-        <nav class="navfooter">
+        <nav>
             <a href="index.php">Accueil</a>
             <?php if(!isset($_SESSION['login'])){ ?>
             <a href="inscription.php">Inscription</a>
@@ -18,6 +18,6 @@
             }?>
         </nav>
         <article>
-            <p>Copyright 2020 Coding School | All Rights Reserved | Project by Thierry, Nicolas & Paul.</p>
+            <p id="copyrights">Copyright 2020 Coding School | All Rights Reserved | Project by Thierry, Nicolas & Paul.</p>
         </article>
     </footer>
