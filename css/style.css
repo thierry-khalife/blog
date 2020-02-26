@@ -583,3 +583,116 @@ footer a {
     text-decoration: none;
     color: #262626;
 }
+
+/* ARTICLE */
+
+.cmid {
+    color: #262626;
+    font-family: "Lato-Regular";
+    font-size: 24px;
+}
+
+.articlepart {
+    width: 80vw;
+    background-color: #f5f5f5;
+    display: flex;
+    flex-direction: column;
+    margin: 0 0 40px 0;
+    box-shadow: 1px 2px 4px grey;
+    align-items: center;
+    padding: 64px;
+}
+
+.cmid h1 {
+    color: #ef9d87;
+    font-family: "AmaticSC-Regular";
+    font-size: 34px;
+}
+
+.cmid p {
+    margin-bottom: 100px;
+}
+
+#formvote {
+    display: flex;
+    align-items: center;
+}
+
+.deletebtn form {
+    width: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 20px;
+}
+
+#like {
+     font-size: 0;
+     width: 24px;
+     height: 24px;
+     border: none;
+     margin: 24px;
+    padding: 0;
+    background: transparent;
+    background-image: url(../img/like.png);
+    opacity: 1;
+}
+
+#like:hover {
+    background-image: url(../img/like.png);
+    opacity: 0.7;
+}
+
+#dislike {
+     font-size: 0;
+     width: 24px;
+     height: 24px;
+     border: none;
+     margin: 24px;
+    padding: 0;
+    background: transparent;
+    background-image: url(../img/dislike.png); 
+}
+
+#dislike:hover {
+    background-image: url(../img/dislike.png);
+    opacity: 0.7;
+}
+
+#likev {
+     font-size: 0;
+     width: 24px;
+     height: 24px;
+     border: none;
+     margin: 24px;
+    padding: 0;
+    background: transparent;
+    background-image: url(../img/likev.png);
+    opacity: 1;
+}
+
+#likev:hover {
+    background-image: url(../img/likev.png);
+    opacity: 0.7;
+}
+
+#dislikev {
+     font-size: 0;
+     width: 24px;
+     height: 24px;
+     border: none;
+     margin: 24px;
+    padding: 0;
+    background: transparent;
+    background-image: url(../img/dislikev.png); 
+}
+
+#dislikev:hover {
+    background-image: url(../img/dislikev.png);
+    opacity: 0.7;
+}
+
+.messageleft {
+    color: #ef9d87;
+    font-family: "AmaticSC-Regular";
+}

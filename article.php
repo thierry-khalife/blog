@@ -44,16 +44,19 @@ if ( isset($_POST['envoyer']) == true && isset($_POST['commentaire']) && strlen(
 <html>
 
 <head>
-    <title>Message</title>
+    <title>Blog - Message</title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 
 <body>
 <?php include("header.php"); ?>
-    <main>
+    <main class="mainarticles">
          <section class="cmid">
-            <h1>Article :</h1>
-            <h1 class="h1topic"><?php echo $resultatarticle[0]['article']; ?></h1>
+            <section class="articlepart">
+            <h1><?php echo $resultatarticle[0]["titre"]; ?></h1>
+            <p class="h1topic"><?php echo nl2br($resultatarticle[0]['article']); ?></p>
+            </section>
+            <section class="articlepart">
             <?php
             $a = 0;
             if( !empty($resultat) && isset($_GET["idarticle"]) ) {
@@ -71,7 +74,6 @@ if ( isset($_POST['envoyer']) == true && isset($_POST['commentaire']) && strlen(
                 ?>
                 <section class="cmessages">
                     <article class="messageleft">
-
                         <h2><?php echo $resultatlogin[0]["login"]; ?></h2>
                     </article>
                     <article class="message">
@@ -102,28 +104,10 @@ if ( isset($_POST['envoyer']) == true && isset($_POST['commentaire']) && strlen(
                                     </div>
                                 </form>
                             </article>
-                            <article class="deletebtn">
-                                <?php
-                                if(isset($_SESSION['login']) && ($_SESSION['droits'] == 1337 || $_SESSION['droits'] == 42))
-                                {
-                                    echo "<form method=\"post\" action=\"article.php?idarticle=$intidarticle\">
-                                    <br><input type=\"submit\" class=\"submitdel\"  name=\"delete".$a."\" value=\"$idcom\" />
-                                    </form>";
-                                }
-                                ?>
-                            </article>
                         </section>
                     </article>
                 </section>
-                <?php // SYSTEME DELETE WHEN ADMIN
-                if (isset($_POST["delete".$a])) {
-                    $todel = $_POST["delete".$a];
-                    $requetedel = "DELETE FROM commentaires WHERE id=$todel";
-                    $querydel = mysqli_query($cnx, $requetedel);
-                    $requetedellike = "DELETE FROM votes WHERE id_message=$todel";
-                    $querydellike = mysqli_query($cnx, $requetedellike);
-                    header("Location: article.php?idarticle=$intidarticle");
-                }
+                <?php
                 $a++;
             }
         }
@@ -134,6 +118,8 @@ if ( isset($_POST['envoyer']) == true && isset($_POST['commentaire']) && strlen(
             echo "Pas de commentaire pour cet article, envoyez votre premier message !";
         }
             ?>
+            </section>
+            <section class="articlepart">
             <?php
            
             if ( isset($_SESSION['login']) && isset($_GET["idarticle"]) && !empty($resultatarticle) ) {
@@ -158,6 +144,7 @@ if ( isset($_POST['envoyer']) == true && isset($_POST['commentaire']) && strlen(
             <?php
             }
             ?>
+            </section>
            </section>
         <section>
      </section>
