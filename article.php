@@ -90,16 +90,16 @@ if ( isset($_POST['envoyer']) == true && isset($_POST['commentaire']) && strlen(
                                     <div id="formvote">
                                     <?php
                                     if ( isset($_SESSION['login']) && $resultat3[0]['COUNT(*)'] != "0" ) {
-                                        echo "<input type=\"submit\" name=\"likebutton".$a."\" id=\"likev\" value=\"like\"><div class=\"resultatvotes\">".$resultat5[0]['COUNT(*)']."</div>";
-                                        echo "<input type=\"submit\" name=\"dislikebutton".$a."\" id=\"dislike\" value=\"dislike\"><div class=\"resultatvotes\">".$resultat6[0]['COUNT(*)']."</div>";
+                                        echo "<input type=\"submit\" name=\"likebutton".$a."\" id=\"likev\" value=\"like\" required><div class=\"resultatvotes\">".$resultat5[0]['COUNT(*)']."</div>";
+                                        echo "<input type=\"submit\" name=\"dislikebutton".$a."\" id=\"dislike\" value=\"dislike\" required><div class=\"resultatvotes\">".$resultat6[0]['COUNT(*)']."</div>";
                                     }
                                     elseif ( isset($_SESSION['login']) && $resultat4[0]['COUNT(*)'] != "0" ) {
-                                        echo "<input type=\"submit\" name=\"likebutton".$a."\" id=\"like\" value=\"like\"><div class=\"resultatvotes\">".$resultat5[0]['COUNT(*)']."</div>";
-                                        echo "<input type=\"submit\" name=\"dislikebutton".$a."\" id=\"dislikev\" value=\"dislike\"><div class=\"resultatvotes\">".$resultat6[0]['COUNT(*)']."</div>";
+                                        echo "<input type=\"submit\" name=\"likebutton".$a."\" id=\"like\" value=\"like\" required><div class=\"resultatvotes\">".$resultat5[0]['COUNT(*)']."</div>";
+                                        echo "<input type=\"submit\" name=\"dislikebutton".$a."\" id=\"dislikev\" value=\"dislike\" required><div class=\"resultatvotes\">".$resultat6[0]['COUNT(*)']."</div>";
                                     }
                                     else {
-                                        echo "<input type=\"submit\" name=\"likebutton".$a."\" id=\"like\" value=\"like\"><div class=\"resultatvotes\">".$resultat5[0]['COUNT(*)']."</div>";
-                                        echo "<input type=\"submit\" name=\"dislikebutton".$a."\" id=\"dislike\" value=\"dislike\"><div class=\"resultatvotes\">".$resultat6[0]['COUNT(*)']."</div>";
+                                        echo "<input type=\"submit\" name=\"likebutton".$a."\" id=\"like\" value=\"like\" required><div class=\"resultatvotes\">".$resultat5[0]['COUNT(*)']."</div>";
+                                        echo "<input type=\"submit\" name=\"dislikebutton".$a."\" id=\"dislike\" value=\"dislike\" required><div class=\"resultatvotes\">".$resultat6[0]['COUNT(*)']."</div>";
                                     }
                                     ?>
                                     </div>
@@ -127,7 +127,7 @@ if ( isset($_POST['envoyer']) == true && isset($_POST['commentaire']) && strlen(
             ?>
                 <form class="form_site" method="post" action="article.php?idarticle=<?php echo $intidarticle; ?>">
                     <label>VOTRE MESSAGE</label>
-                    <textarea name="commentaire" ></textarea><br />
+                    <textarea name="commentaire" required></textarea><br />
                     <input type="submit" value="Envoyer" name="envoyer" >
                 </form>
                 <?php
@@ -140,8 +140,8 @@ if ( isset($_POST['envoyer']) == true && isset($_POST['commentaire']) && strlen(
 
             elseif ( !isset($_SESSION['login']) ) {
             ?>
-                <center><p><b>ERREUR</b><br />
-                Vous devez être connecté pour accéder à cette page.</p></center>
+                <p class="red center">ERREUR</b><br />
+                Vous devez être connecté pour accéder à cette page.</p>
             <?php
             }
             ?>

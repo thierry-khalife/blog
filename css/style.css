@@ -696,3 +696,36 @@ footer a {
     color: #ef9d87;
     font-family: "AmaticSC-Regular";
 }
+
+/* ADMIN */
+
+.modif {
+    display: flex;
+    flex-wrap: wrap;
+    width: 96vw;
+    margin: 0;
+    justify-content: center;
+}
+
+.modif form {
+    width: initial;
+    height: initial;
+}
+
+.modif .cform {
+    margin: 10px;
+    padding: 0;
+}
+
+.titleadmin {
+    font-family: "AmaticSC-Regular";
+    font-size: 54px;
+    color: #ef9d87;
+    display: flex;
+    justify-content: center;
+    margin: 40px 0 40px 0;
+}
+
+.green {
+    color: #3abd2ef5;
+}
