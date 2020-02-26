@@ -49,7 +49,7 @@ $size = count($resultat);
        </article>
        
        <article class="descarticles">
-                    <?php echo $resultat[$i]['article']; ?>
+                    <?php echo nl2br($resultat[$i]['article']); ?>
        </article>
        <article class="basarticles">
                     <article class="basleftarticles">
