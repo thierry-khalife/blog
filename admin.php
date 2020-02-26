@@ -108,59 +108,87 @@ if(isset($_SESSION['login']) && $_SESSION['droits'] == 1337)
         $nbCate++;
     }
 
-    if(isset($_POST['envoyerCategorie']) && strlen($_POST['ajoutCategorie']) != 0)
+    if(isset($_POST['envoyerCategorie']))
     {
-        $cate = $_POST['ajoutCategorie'];
-        $requeteCate = "INSERT INTO categories (nom) VALUES('".$cate."')";
-        $queryCate = mysqli_query($connexion,$requeteCate);
-        header('Location:admin.php');
-    }
-
-    if(isset($_POST['envoyerDroitAdmin']) && strlen($_POST['droitNameAdmin']) != 0)
-    {
-        $upAdmin = $_POST["droitNameAdmin"];
-        $nbUsers = 0;
-        while($nbUsers != $countUsers)
+        if(strlen($_POST['ajoutCategorie']) != 0)
         {
-            if($resultatUsers[$nbUsers][1] == $upAdmin && $resultatUsers[$nbUsers][4] != 1337)
-            {
-                $updateDroitAdmin = "UPDATE utilisateurs SET id_droits = 1337 WHERE login = '".$upAdmin."'";
-                $queryDroitAdmin = mysqli_query($connexion,$updateDroitAdmin);
-                header('Location:admin.php');
-            }
-            $nbUsers++;
+            $cate = $_POST['ajoutCategorie'];
+            $requeteCate = "INSERT INTO categories (nom) VALUES('".$cate."')";
+            $queryCate = mysqli_query($connexion,$requeteCate);
+            header('Location:admin.php');
+        }
+        else
+        {
+            echo "Veuillez remplir le champ que vous souhaitez modifier !";
         }
     }
 
-    if(isset($_POST['envoyerDroitModo']) && strlen($_POST['droitNameModo']) != 0)
+    if(isset($_POST['envoyerDroitAdmin']))
     {
-        $upModo = $_POST["droitNameModo"];
-        $nbUsers = 0;
-        while($nbUsers != $countUsers)
+        if(strlen($_POST['droitNameAdmin'] != 0))
         {
-            if($resultatUsers[$nbUsers][1] == $upModo && $resultatUsers[$nbUsers][4] != 42)
+            $upAdmin = $_POST["droitNameAdmin"];
+            $nbUsers = 0;
+            while($nbUsers != $countUsers)
             {
-                $updateDroitModo = "UPDATE utilisateurs SET id_droits = 42 WHERE login = '".$upModo."'";
-                $queryDroitModo = mysqli_query($connexion,$updateDroitModo);
-                header('Location:admin.php');
+                if($resultatUsers[$nbUsers][1] == $upAdmin && $resultatUsers[$nbUsers][4] != 1337)
+                {
+                    $updateDroitAdmin = "UPDATE utilisateurs SET id_droits = 1337 WHERE login = '".$upAdmin."'";
+                    $queryDroitAdmin = mysqli_query($connexion,$updateDroitAdmin);
+                    header('Location:admin.php');
+                }
+                $nbUsers++;
             }
-            $nbUsers++;
+        }
+        else
+        {
+            echo "Veuillez remplir le champ que vous souhaitez modifier !";
         }
     }
 
-    if(isset($_POST['envoyerDroitMembre']) && strlen($_POST['droitNameMembre']) != 0)
+    if(isset($_POST['envoyerDroitModo']))
     {
-        $upMembre = $_POST["droitNameMembre"];
-        $nbUsers = 0;
-        while($nbUsers != $countUsers)
+        if(strlen($_POST['droitNameModo'] != 0))
         {
-            if($resultatUsers[$nbUsers][0] != 1 && $resultatUsers[$nbUsers][1] == $upMembre && $resultatUsers[$nbUsers][4] != 1)
+            $upModo = $_POST["droitNameModo"];
+            $nbUsers = 0;
+            while($nbUsers != $countUsers)
             {
-                $updateDroitMembre = "UPDATE utilisateurs SET id_droits = 1 WHERE login = '".$upMembre."'";
-                $queryDroitMembre = mysqli_query($connexion,$updateDroitMembre);
-                header('Location:admin.php');
+                if($resultatUsers[$nbUsers][1] == $upModo && $resultatUsers[$nbUsers][4] != 42)
+                {
+                    $updateDroitModo = "UPDATE utilisateurs SET id_droits = 42 WHERE login = '".$upModo."'";
+                    $queryDroitModo = mysqli_query($connexion,$updateDroitModo);
+                    header('Location:admin.php');
+                }
+                $nbUsers++;
             }
-            $nbUsers++;
+        }
+        else
+        {
+            echo "Veuillez remplir le champ que vous souhaitez modifier !";
+        }
+    }
+
+    if(isset($_POST['envoyerDroitMembre']))
+    {
+        if(strlen($_POST['droitNameMembre'] != 0))
+        {
+            $upMembre = $_POST["droitNameMembre"];
+            $nbUsers = 0;
+            while($nbUsers != $countUsers)
+            {
+                if($resultatUsers[$nbUsers][0] != 1 && $resultatUsers[$nbUsers][1] == $upMembre && $resultatUsers[$nbUsers][4] != 1)
+                {
+                    $updateDroitMembre = "UPDATE utilisateurs SET id_droits = 1 WHERE login = '".$upMembre."'";
+                    $queryDroitMembre = mysqli_query($connexion,$updateDroitMembre);
+                    header('Location:admin.php');
+                }
+                $nbUsers++;
+            }
+        }
+        else
+        {
+            echo "Veuillez remplir le champ que vous souhaitez modifier !";
         }
     }
 
