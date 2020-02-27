@@ -151,7 +151,7 @@ if ( isset($_POST['envoyer']) == true && isset($_POST['commentaire']) && strlen(
      </section>
 
     <?php 
-    if($_SESSION['droits'] == 1337 || $_SESSION['droits'] == 42){
+    if ( $_SESSION['droits'] == 1337 ) {
     ?>
     <form action="article.php?idarticle=<?php echo $intidarticle; ?>" method="post">
     <label for="editarticle">Edit Article:</label>

@@ -63,9 +63,7 @@
 
     elseif ( !isset($_SESSION['login']) || $_SESSION['droits'] == 1) {
     ?>
-        <center>
-        <p><b>ERREUR</b><br />
-        Vous devez être connecté en tant qu'admin ou moderateur pour accéder à cette page.</p></center>
+        <p class="red center">Vous devez être connecté en tant qu'admin ou modérateur pour pouvoir accéder à cette page.</p>
     <?php
     }
     ?>

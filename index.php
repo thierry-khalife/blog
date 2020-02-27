@@ -53,7 +53,7 @@ $size = count($resultat);
         </article>
         <article class="basarticles">
                         <article class="basleftarticles">
-                            <p>Créé le <img class="iconarticles" src="img/icondate.png"><?php echo $resultat[$i]['date'];?> par <img class="iconarticles" src="img/iconuser.png"><?php echo $resultatuser[0]['login'];?></p>
+                            <p>CrÃ©Ã© le <img class="iconarticles" src="img/icondate.png"><?php echo $resultat[$i]['date'];?> par <img class="iconarticles" src="img/iconuser.png"><?php echo $resultatuser[0]['login'];?></p>
                         </article>
                         <article class="basrightarticles">
                             <a href="article.php?idarticle=<?php echo $resultat[$i]['id']; ?>">Voir plus</a>
@@ -72,14 +72,23 @@ $size = count($resultat);
         <article class="profilepart">
             <article class="profilepartimg"></article>
             <h1>Qui suis-je ?</h1>
-            <p>Je m'appelle John et je suis passionné par les voyages. A l'âge de 23 ans je suis partie en tour du monde sur un coup de tête, et c'est à ce moment-là que j'ai créé ce blog voyage.<br /><br />Il regroupe de nombreux conseils aux voyageurs et des récits de voyage inspirants, agrémentés de nombreuses photos.<br /><br />Le but, t'aider dans tes voyages et t'inspirer au quotidien !</p>
+            <p>Je m'appelle John et je suis passionnÃ© par les voyages. A l'Ã¢ge de 23 ans je suis partie en tour du monde sur un coup de tÃªte, et c'est Ã  ce moment-lÃ  que j'ai crÃ©Ã© ce blog voyage.<br /><br />Il regroupe de nombreux conseils aux voyageurs et des rÃ©cits de voyage inspirants, agrÃ©mentÃ©s de nombreuses photos.<br /><br />Le but, t'aider dans tes voyages et t'inspirer au quotidien !</p>
         </article>
         <article class="categoriepart">
-            <h1>Catégories</h1>
+            <h1>CatÃ©gories</h1>
             <ul>
-                <li><span>></span> <a href="articles?start=0&categorie=1">Destinations</a></li>
-                <li><span>></span> <a href="articles?start=0&categorie=2">Conseils</a></li>
-                <li><span>></span> <a href="articles?start=0&categorie=3">Recommandations</a></li>
+            <?php
+            $requeterecupcategories = "SELECT nom FROM categories";
+            $queryrecupcategories = mysqli_query($cnx, $requeterecupcategories);
+            $resultatrecupcategories = mysqli_fetch_all($queryrecupcategories);
+            $i = 1;
+            foreach ( $resultatrecupcategories as $values ) {
+                ?>
+                <li><span>></span> <a href="articles?start=0&categorie=<?php echo $i; ?>"><?php echo $values[0]; ?></a></li>
+                <?php
+                $i++;
+            }
+            ?>
             </ul>
         </article>
     </section>
